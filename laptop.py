@@ -97,7 +97,7 @@ def push_data():
     current_temp, critical_temp = get_temp()
     current, last_capacity = get_battery()
     load = get_load()
-    load_av, threads_and_procs_running = load[1], load[3]
+    load_av, threads_and_procs_running = load[1], load[4]
     pachube = eeml.Pachube(keys.API_URL, keys.API_KEY)
     pachube.update([eeml.Data(0, current_temp),
                     eeml.Data(1, load_av),

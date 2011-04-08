@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> 
+  <head> 
+    <title>Pachube chatbot</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="robots" content="All" /> 
+    <meta name="copyright" content="University of Wolverhampton" /> 
+    <link id="theme" rel="stylesheet" type="text/css" href="/css/style.css" title="theme" /> 
+
+	<style type="text/css">
+form {
+  width: 700px;
+  color: #3E4A49;
+  background-color: #EEEEEE;
+  padding: 20px;
+  margin: 20px;
+}
+ 
+fieldset {
+  padding: 0 20px 20px;
+  margin: 0 0 20px;
+  border: 1px solid #3E4A49;
+}
+ 
+legend {
+  color: #FFFFFF;
+  background-color: #444444;
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 0;
+  width: 200px;
+  border: 1px solid #3E4A49;
+}
+ 
+label {
+	display: block;
+	float: left;
+	text-align: right;
+	width: 100px;
+	font-weight: bold;
+	margin-right: 10px;
+}
+ 
+#buttons {
+  text-align: right;
+  margin: -15px 0 -5px 0;
+}
+ 
+input.button {
+  width: auto;
+  background: #FFFFFF;
+  border: 2px solid #4899BE;
+}
+
+textarea:focus, input:focus {
+	border: 2px solid #9b251b;
+}
+
+.throbber {
+	width: 100%;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.throbber img {
+	text-align: center;
+}
+	</style>
+
+	<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script> 
+	<script type="text/javascript" language="javascript" src="http://s.phono.com/releases/0.1/jquery.phono.js"></script> 
+	<script type="text/javascript"> 
+$(document).ready(function() {
+
+    var myPhono = $.phono({
+  
+
+
+        onReady: function() {
+			$("#sendChat").attr("disabled", false);
+			$("#loader").hide();
+			$("#chat").fadeIn(2000);
+        },
+      
+        messaging: {
+			onMessage: function(event) {
+				// Get message from event and log it
+				var message = event.message;
+				appendChat("\nSarah's laptop: " + message.body); 
+			}
+        },
+
+    }); // end .phono
+
+    $('#sendChat').click(function() {
+        var msg = $('#chatText').val();
+		if (msg.length == 0) { 
+			return; 
+		}
+		appendChat("\nYou: " + msg);
+        myPhono.messaging.send("pachube@bot.im", msg);
+    });
+	
+    $('form').submit(function () { 
+        return false; 
+    }); 
+
+    function appendChat(msg) {
+        // Append msg and scroll chat history.
+        var history = $('#chatHistory');
+        history.append(msg); 
+        // If the text does not fit in the text box, scroll up.
+        history.animate({ scrollTop: history.height() }, 1000);
+        // Clear input box.
+        $('#chatText').val('');
+    };
+
+}); // end ready
+	</script>
+
+  </head> 
+  <body> 
+
+  <div class="throbber" id="loader"> 
+    <img src="images/throbber.gif"/> 
+  </div> 
+ 
+  <div id="chat" style="display:none"> 
+    <form id="chatForm">
+      <fieldset> 
+        <legend>Sarah's laptop is <span style="color:rgb(0, 255, 0);">ONLINE</span></legend> 
+        <p><textarea cols="70" rows="20" name="messages" id="chatHistory" title="Live chat"></textarea><p/> 
+        <p><input type="text" size="50%" name="message" id="chatText"/>&nbsp;
+		  <input type="submit" disabled="true" value="Chat" name="send" id="sendChat"/></p> 
+       </fieldset> 
+      </form> 
+  </div> 
+ 
+  </body> 
+</html> 

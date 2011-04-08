@@ -1,0 +1,52 @@
+application: pachubelaptop
+version: 1
+runtime: python
+api_version: 1
+
+
+
+handlers:
+
+# Images:
+
+- url: /images
+  static_dir: static/images
+
+
+# Instant messenger bot:
+# Should *not* require a login or admin account.
+
+- url: /bot/.*
+  script: imbot.py
+
+
+# Chatbot interface
+
+- url: /(.*)
+  static_files: static/index.html
+  upload: static/index.html
+
+
+# Built-in services (new to appengine SDK 1.3.8)
+
+builtins:
+- datastore_admin: on
+- appstats: on
+
+
+# Files for appengine to ignore:
+
+skip_files:
+  - ^(.*/)?app\.yaml
+  - ^(.*/)?app\.yml
+  - ^(.*/)?index\.yaml
+  - ^(.*/)?index\.yml
+  - ^(.*/)?#.*#
+  - ^(.*/)?.*~
+  - ^(.*/)?.*\.py[co]
+  - ^(.*/)?.*/RCS/.*
+  - ^(.*/)?\..*
+  - ^(.*/)?.git/.*$
+  - ^venv/.*$
+  - ^(.*/)?/styling/.*
+  - ^(.*/)?/google_appengine/.*

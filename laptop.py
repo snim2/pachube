@@ -3,6 +3,16 @@
 """
 Read sensor data from a laptop and feed to pachube.com
 
+To make this work you need a file called keys.py with the following:
+
+    API_KEY = 'YOUR PERSONAL API KEY'
+    API_URL = 'YOUR PERSONAL API URL, LIKE /api/1275.xml'
+
+You may also wish to configure the global variables PROC_TEMP and
+PROC_BATTERY which should give the paths to the directoris in /proc
+which contain status information about your temperature and battery.
+
+
 Copyright (C) Sarah Mount, 2011.
 
 This program is free software; you can redistribute it and/or

@@ -1,0 +1,7 @@
+# Schedule a cron job to grab Pachube data.
+
+cron:
+
+- description: Fetch Pachube data from live feed.
+  url: /feedgrabber/
+  schedule: every 10 minutes

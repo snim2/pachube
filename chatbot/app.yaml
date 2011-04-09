@@ -13,6 +13,10 @@ handlers:
   static_dir: static/images
 
 
+- url: /feedgrabber/.*
+  script: feedgrabber.py
+
+
 # Instant messenger bot:
 # Should *not* require a login or admin account.
 

@@ -20,7 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 __author__ = 'Sarah Mount'
 __date__ = 'September 2010'
 
-from google.appengine.ext import db
+# pylint: disable=W0613
+# pylint: disable=E0611
+# pylint: disable=F0401
+# pylint: disable=E1101
+
+
 from google.appengine.ext import webapp
 
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -33,14 +38,15 @@ import urllib
 
 import xml.dom.minidom as minidom
 
+import brain
+
 ### imified.com details
-BOTKEY = '153885E3-4190-450C-ADC7873170752670'
-USER = 's.mount@wlv.ac.uk'
-PASSWORD = 'f00bar'
+from keys import BOTKEY, USER, PASSWORD
 
-    
+
 class IMBot(webapp.RequestHandler):
-
+    MARVIN = brain.MarvinsBrain()
+    
     @classmethod
     def imified(cls, form_fields):
         """Call an imified.com API method and handle response.
@@ -86,9 +92,9 @@ class IMBot(webapp.RequestHandler):
     def get_all_users(cls, network=None):
         form_fields = {'botkey':BOTKEY,
                        'apimethod':'getAllUsers',
-                       'userkey':userkey}
+                       'userkey':'userkey'}
         if network is not None:
-            form_fields['network':network]
+            form_fields['network':'network']
         response = IMBot.imified(form_fields)
         if response.status_code == 200:
             xml = minidom.parseString(response.content)
@@ -132,17 +138,20 @@ class IMBot(webapp.RequestHandler):
         return # Response only contains success / fail information.
     
     def post(self):
-        """Conversational part of BOT goes here.
+        """Conversational part of the bot goes here.
         """
         req_data = []
         for arg in self.request.arguments():
             req_data.append(arg + '=' + self.request.get(arg))
-        logging.debug('Got following request data: ' +
-                      ' '.join(req_data))
-        self.response.out.write("Hello from Sarah's laptop!")
+        logging.debug('Got following request data: ' + ' '.join(req_data))
+        history = [self.request.get('value' + str(arg)) for arg in range(int(self.request.get('step')))]
+        logging.debug('Constructed history ' + ', '.join(history))
+        reply = IMBot.MARVIN.construct_reply(history)
+        logging.debug('Bot response: ' + reply)
+        self.response.out.write(reply)
 
     def get(self):
-        msg = 'Working on something for our 5CS006 students...watch this space!'
+        msg = 'Hello world!'
         IMBot.update_status('jabber', msg)
 
 

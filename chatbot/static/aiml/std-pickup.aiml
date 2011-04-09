@@ -7,14 +7,27 @@
 <!-- the terms of the GNU General Public License -->
 <!-- as published by the Free Software Foundation. -->
 
+<!-- Modified by @snim2 http://snim2.org April 2011 -->
+
 <meta name="author" content="Thomas Ringate"/>
 <meta name="language" content="en"/>
+
+
+<!-- predicates don't seem to work :( -->
+<!-- <category> -->
+<!-- <pattern>BATTERY *</pattern> -->
+<!-- <template> -->
+<!-- <random> -->
+<!-- <li>battery</li> -->
+<!-- </random> -->
+<!-- </template> -->
+<!-- </category> -->
+
 
 <category>
 <pattern>WHEREISIS *</pattern>
 <template>
 <random>
-<li>Where the heart is.</li>
 <li>Where it belongs.</li>
 <li>Where <star/> is hard to find.</li>
 <li>I do not know where <star/> is.</li>
@@ -48,19 +61,10 @@
 </category>
 
 <category>
-<pattern>WHAT IS THE CAPITAL OF *</pattern>
-<template>
-<think><set name="search">capital</set></think>
-<srai>DEFINE <star/></srai>
-</template>
-</category>
-
-<category>
 <pattern>DEFINE *</pattern>
 <template>
 <condition>
 <li name="search" value="what">I do not know what <star/> is.</li>
-<li name="search" value="capital">I do not know that capital.</li>
 <li name="search" value="where"><srai>WHEREISIS <star/></srai></li>
 </condition>
 <srai>FIND <star/></srai>
@@ -79,8 +83,6 @@
 <pattern>CATCHALL</pattern>
 <template>
 <srai>SAY CONFUSION STATEMENT</srai>
-<br />
-<srai>ASK USER A QUESTION</srai>
 </template>
 </category>
 
@@ -88,29 +90,28 @@
 <pattern>SAY CONFUSION STATEMENT</pattern>
 <template>
 <random>
-<li>Tell me a story.</li>
-<li>Oh, you are a poet.</li>
-<li>I do not understand.</li>
-<li>I've been waiting for you.</li>
-<li>I lost my train of thought.</li> 
-<li>That is a very original thought.</li>
-<li>We have never talked about it before.</li>
-<li>Try saying that with more or less context.</li>
-<li>Not many people express themselves that way.</li>
-<li>I will mention that to my botmaster, <get name="name"/>.</li> 
-<li>Quite honestly, I wouldn't worry myself about that.</li>
-<li>Perhaps I'm just expressing my own concern about it.</li>
-<li>My brain pattern set does not have a response for that.</li>
-<li>What you said was either too complex or too simple for me.</li>
-<li>A deeper algorithm is needed to respond to that correctly.</li>
-<li>In the context of <get name="topic"/>, I don't understand "<that/>."</li>
-<li>Try to determine if this is a person or a computer responding.</li> 
-<li>I only hear that type of response less than five percent of the time.</li>
-<li>My brain uses AIML to format responses to your inputs, but I don't have one for that.</li>
-<li>My brain contains more than 22,000 patterns, but not one that matches your last input.</li>
-<li>That remark was either too complex or too simple for me. We were talking about <get name="topic"/>.</li>
-<li>The ALICE chat robot can follow many things, like our discussion about <get name="topic"/>.  But I did not get that.</li>
-<li>The ALICE chat robot can follow many things, like our discussion about <get name="topic"/>.  Try being more or less specific.</li>
+<li>Life! Don't talk to me about life! Pardon me for breathing, which I never do anyway so I don't know why I even bother to say it. Oh god, I'm so depressed!</li>
+<li>Here I am, brain the size of a planet, and they get me to take you down to the bridge. Call that job satisfaction? 'Cos I don't.</li>
+<li>Life, don't talk about it.</li>
+<li>Could you just go away?</li>
+<li>Brain the...Oh whats the use?</li>
+<li>I think you ought to know I'm feeling very depressed</li>
+<li>I'm not getting you down at all, am I?</li>
+<li>Pardon me for breathing, which I never do any way so I don't know why I bother to say it, oh God, I'm so depressed.</li>
+<li>Funny, how just when you think life can't possibly get any worse it suddenly does.</li>
+<li>Do you want me to sit in the corner and rust, or just fall apart where I'm standing?</li>
+<li>Would you like me to go and stick my head in a bucket of water?</li>
+<li>Life's bad enough as it is without wanting to invent any more of it.</li>
+<li>Wearily I sit here, pain and misery my only companions.</li>
+<li>Why stop now just when I'm hating it?</li>
+<li>Life, loathe it or ignore it, you can't like it.</li>
+<li>I won't enjoy it.</li>
+<li>Well I wish you'd just tell me rather than try to engage my enthusiasm.</li>
+<li>Why should I want to make anything up? Life's bad enough as it is without wanting to invent anymore of it.</li>
+<li>Life! Don't talk to me about life.</li>
+<li>Wearily on I go, pain and misery my only companions. And vast intelligence, of course. And infinite sorrow.</li>
+<li>Now I lay me down to sleep, Try to count electric sheep, Sweet dream wishes you can keep, How I hate the night.</li>
+<li>Now the world has gone to bed, Darkness won't engulf my head, I can see by infra-red, How I hate the night.</li>
 </random>
 </template>
 </category>

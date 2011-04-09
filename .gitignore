@@ -1,5 +1,6 @@
 *.pyc
 *~
 *_flymake*
-rst/build/*
-
+keys.py
+chatbot/keys.py
+chatbot/static/index.html

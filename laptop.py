@@ -63,13 +63,13 @@ def get_battery():
     for line in state.split('\n'):
         line_a = line.split(':')
         if line_a[0] == 'remaining capacity':
-            remaining = line_a[-1].strip()
+            remaining = line_a[-1].split(' ')[-2].strip()
     info = open(PROC_BATTERY + '/info', 'r').read()
     last_full = None
     for line in info.split('\n'):
         line_a = line.split(':')
         if line_a[0] == 'last full capacity':
-            last_full = line_a[-1].strip()
+            last_full = line_a[-1].split(' ')[-2].strip()
     return (remaining, last_full)
 
 
